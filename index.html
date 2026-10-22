@@ -201,6 +201,7 @@ a{color:var(--gold)}
 .bk-who .av{width:52px;height:52px;border-radius:50%;background:var(--night);border:2px solid rgba(255,255,255,.6);display:grid;place-items:center;font-size:24px}
 .bk-who.l{left:20px}.bk-who.r{right:20px}
 .bk-book{position:absolute;left:24px;top:24px;width:84px;height:112px;border-radius:4px 9px 9px 4px;background:linear-gradient(90deg,#0A2A8C 0 11%,#1F5BE0 11%);box-shadow:0 12px 24px rgba(0,0,0,.4);display:grid;place-items:center;align-content:center;gap:8px;color:#fff;transition:left .9s cubic-bezier(.5,0,.2,1),transform .9s}
+.bk-book,.book{cursor:pointer;-webkit-user-select:none;user-select:none}
 .bk-book span{font:900 11px/1 var(--f-display);letter-spacing:.06em}
 .bk-book i{font:700 10px/1 var(--f-mono);font-style:normal;background:rgba(255,255,255,.18);padding:4px 6px;border-radius:4px}
 .bk-stage.go .bk-book{left:calc(100% - 108px);transform:rotate(-5deg)}
@@ -596,7 +597,7 @@ a{color:var(--gold)}
       <h3>Libri usati</h3>
       <p>Vendi i libri che non ti servono più e compri quelli dell'anno prossimo, tra studenti. Chi vende lascia il numero o l'Instagram e vi accordate tra voi.</p>
       <div class="stage-box" id="trade">
-        <div class="book">Fisica<span class="tag">In vendita</span></div>
+        <div class="book" id="tradeBook" role="button" tabindex="0" aria-label="Compra il libro">Fisica<span class="tag">In vendita</span></div>
         <div class="trade">
           <div class="who"><span class="av">📚</span>Chi vende</div>
           <span class="arrow">→</span>
@@ -621,7 +622,7 @@ a{color:var(--gold)}
     </div>
     <div class="bk-stage" id="bkStage">
       <div class="bk-who l"><span class="av">🧑</span>Tuo fratello<small>l'anno scorso</small></div>
-      <div class="bk-book" id="bkBook"><span>FISICA</span><i>Ed. 2025</i></div>
+      <div class="bk-book" id="bkBook" role="button" tabindex="0" aria-label="Passa il libro"><span>FISICA</span><i>Ed. 2025</i></div>
       <div class="bk-who r"><span class="av">🎒</span>Tu<small>quest'anno</small></div>
       <div class="bk-verdict bad" id="bkVerdict">Nuova edizione:<br>ricompralo</div>
     </div>
@@ -1251,6 +1252,9 @@ a{color:var(--gold)}
       v.innerHTML = m ? 'Va ancora bene ✓' : 'Nuova edizione:<br>ricompralo';
     }
     tabs.forEach((t, j) => t.addEventListener('click', () => setMode(j)));
+    const bk = $('#bkBook');
+    bk.addEventListener('click', () => go.click());
+    bk.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go.click(); } });
     go.addEventListener('click', () => {
       if (st.classList.contains('go')) { reset(); return; }
       st.classList.add('go'); go.textContent = 'Riprova';
@@ -1374,7 +1378,9 @@ a{color:var(--gold)}
     const open = notes.classList.toggle('fan');
     notesMsg.textContent = open ? 'Fisica, Latino, Matematica: scegli e scarica.' : 'Tocca gli appunti.';
   });
-  const trade = $('#trade'), tradeBtn = $('#tradeBtn'), tag = $('#trade .tag');
+  const trade = $('#trade'), tradeBtn = $('#tradeBtn'), tag = $('#trade .tag'), tBook = $('#tradeBook');
+  tBook.addEventListener('click', () => tradeBtn.click());
+  tBook.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tradeBtn.click(); } });
   tradeBtn.addEventListener('click', () => {
     const sold = trade.classList.toggle('sold');
     tag.textContent = sold ? 'Venduto!' : 'In vendita';
