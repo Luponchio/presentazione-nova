@@ -1183,7 +1183,7 @@ a{color:var(--gold)}
     { id: 'giusto-make-up', name: 'Giusto Make Up', off: '-20%', det: 'Su tutto.' },
     { id: 'voglia-di-studiare', name: 'Voglia di Studiare', off: '-20%', det: 'Sulle prime 5 lezioni di ripetizione, di ogni materia.' },
     { id: 'platinum', name: 'Platinum', off: '5–10%', det: 'Di sconto sui capi di abbigliamento.' },
-    { id: 'caffe-piave', name: 'Caffè Piave', off: 'Prezzi speciali', det: 'Cappuccino e cornetto a 2,80€, menù pranzo completo a 9,50€.' }
+    { id: 'caffe-piave', name: 'Caffè Piave', off: 'Prezzi speciali', det: '' }
   ];
   const track = $('#lcTrack'), info = $('#lcInfo'), dots = $('#lcDots');
   track.innerHTML = PARTNERS.map((p, i) => `<button type="button" class="lc-item${p.gold ? ' gold' : ''}" data-i="${i}" aria-label="${p.name}"><img src="assets/logo-${p.id}.webp" alt="" width="220" height="220"></button>`).join('');
