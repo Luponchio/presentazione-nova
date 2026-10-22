@@ -66,7 +66,7 @@ a{color:var(--gold)}
 .ch{position:relative;padding-block:84px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow:hidden}
 .ch--brand{background:radial-gradient(130% 75% at 50% 42%,var(--sky) 0%,var(--blue) 72%)}
 .ch--night{background:radial-gradient(90% 50% at 50% 0%,rgba(2,168,236,.20),transparent 70%),var(--night)}
-.wrap{max-width:600px;margin:0 auto;display:grid;gap:22px}
+.wrap{max-width:600px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
 .kicker{font:700 12px/1.3 var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:grid;gap:10px;justify-items:start}
 .kicker::after{content:"";width:34px;height:2px;background:var(--gold)}
 .title{font:900 clamp(46px,13.5vw,84px)/.88 var(--f-display);text-transform:uppercase;letter-spacing:-.01em;margin:0;text-wrap:balance}
@@ -151,12 +151,6 @@ a{color:var(--gold)}
 .nc-glare{position:absolute;inset:0;background:radial-gradient(40% 50% at var(--gx) var(--gy),rgba(255,255,255,.38),transparent 70%);mix-blend-mode:overlay;pointer-events:none}
 .ncard.idle .nc-glare{animation:glare 6s ease-in-out infinite}
 @keyframes glare{0%,100%{background-position:0 0;opacity:.6}50%{opacity:1}}
-.pond{position:relative;width:100%;height:360px;border-radius:24px;background:radial-gradient(70% 60% at 50% 50%,rgba(2,168,236,.18),transparent 75%);border:1px dashed var(--line);touch-action:pan-y;overflow:hidden;--lr:34px}
-.pl{position:absolute;left:0;top:0;width:calc(var(--lr)*2);height:calc(var(--lr)*2);border-radius:50%;will-change:transform}
-.pl img{width:100%;height:100%;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.75),0 8px 18px rgba(0,0,0,.35);transition:transform .25s}
-.pl.hit img{animation:hit .45s ease}
-@keyframes hit{40%{transform:scale(1.22)}}
-.pl.gold img{box-shadow:0 0 0 3px var(--gold),0 0 0 7px rgba(255,214,102,.25),0 10px 26px rgba(0,0,0,.4);animation:glow 2.4s ease-in-out infinite}
 @keyframes glow{50%{box-shadow:0 0 0 3px var(--gold),0 0 0 11px rgba(255,214,102,.12),0 10px 26px rgba(0,0,0,.4)}}
 /* calcolatore risparmio */
 .calc{display:grid;gap:18px;padding:20px 16px;border-radius:22px;background:var(--navy);border:1px solid var(--line)}
@@ -175,9 +169,45 @@ a{color:var(--gold)}
 .total strong{font:900 clamp(44px,14vw,68px)/1 var(--f-display);color:var(--gold);font-variant-numeric:tabular-nums}
 .total .tot-m{font:600 14px/1.3 var(--f-body);color:var(--white)}
 .calc .fine-print{margin:0;font-size:12.5px;line-height:1.45;color:var(--ice);opacity:.85}
-.pond-cap{min-height:1.5em;margin:0;font:600 15px/1.4 var(--f-body);color:var(--white)}
 .more{font:800 22px/1.1 var(--f-display);text-transform:uppercase;margin:0}
 .more span{color:var(--gold)}
+
+
+/* carosello loghi della Card */
+.lc{position:relative;min-width:0;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.lc-track{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px calc(50% - 42px);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.lc-track::-webkit-scrollbar{display:none}
+.lc-item{flex:none;width:84px;height:84px;scroll-snap-align:center;border-radius:50%;transform:scale(var(--s,.8));opacity:var(--o,.5);will-change:transform}
+.lc-item img{width:100%;height:100%;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.8),0 10px 24px rgba(0,0,0,.35)}
+.lc-item.gold img{box-shadow:0 0 0 3px var(--gold),0 0 0 7px rgba(255,214,102,.25),0 10px 26px rgba(0,0,0,.4)}
+.lc-info{display:grid;justify-items:center;gap:6px;text-align:center;min-height:150px;align-content:start}
+.lc-info.chg{animation:pop2 .35s ease both}
+.lc-k{font:700 10px/1 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:6px 10px;border-radius:99px}
+.lc-k:empty{display:none}
+#lcName{font:800 22px/1.05 var(--f-display);text-transform:uppercase}
+#lcOff{font:900 clamp(40px,12vw,58px)/1 var(--f-display);color:var(--gold)}
+#lcDet{font:500 14.5px/1.4 var(--f-body);color:var(--ice);max-width:34ch}
+.lc-dots{display:flex;justify-content:center;gap:6px}
+.lc-dots i{width:6px;height:6px;border-radius:50%;background:rgba(215,238,255,.3);transition:.25s}
+.lc-dots i.on{background:var(--gold);width:18px;border-radius:3px}
+
+/* libri che durano */
+.bopts{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:99px;background:rgba(6,14,27,.6);border:1px solid var(--line)}
+.bopts button{padding:12px 0;border-radius:99px;font:700 13px/1.15 var(--f-body);color:var(--ice)}
+.bopts button.on{background:var(--gold);color:var(--ink)}
+.bk-stage{position:relative;height:290px;border-radius:22px;background:var(--navy);border:1px solid var(--line);overflow:hidden}
+.bk-who{position:absolute;bottom:20px;display:grid;justify-items:center;gap:6px;font:700 13px/1.2 var(--f-body);text-align:center}
+.bk-who small{font:500 11px/1.2 var(--f-mono);color:var(--ice)}
+.bk-who .av{width:52px;height:52px;border-radius:50%;background:var(--night);border:2px solid rgba(255,255,255,.6);display:grid;place-items:center;font-size:24px}
+.bk-who.l{left:20px}.bk-who.r{right:20px}
+.bk-book{position:absolute;left:24px;top:24px;width:84px;height:112px;border-radius:4px 9px 9px 4px;background:linear-gradient(90deg,#0A2A8C 0 11%,#1F5BE0 11%);box-shadow:0 12px 24px rgba(0,0,0,.4);display:grid;place-items:center;align-content:center;gap:8px;color:#fff;transition:left .9s cubic-bezier(.5,0,.2,1),transform .9s}
+.bk-book span{font:900 11px/1 var(--f-display);letter-spacing:.06em}
+.bk-book i{font:700 10px/1 var(--f-mono);font-style:normal;background:rgba(255,255,255,.18);padding:4px 6px;border-radius:4px}
+.bk-stage.go .bk-book{left:calc(100% - 108px);transform:rotate(-5deg)}
+.bk-verdict{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) rotate(-8deg) scale(.6);opacity:0;font:900 clamp(16px,4.8vw,22px)/1.1 var(--f-display);text-transform:uppercase;text-align:center;padding:10px 14px;border-radius:10px;border:3px solid currentColor;white-space:nowrap;transition:.4s cubic-bezier(.2,1.5,.4,1) .85s}
+.bk-stage.go .bk-verdict{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1)}
+.bk-verdict.bad{color:#FF6B6B;background:rgba(40,8,12,.85)}
+.bk-verdict.ok{color:#2BD08A;background:rgba(6,30,20,.85)}
 
 /* ---------- Settimana dello studente ---------- */
 .week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
@@ -500,6 +530,7 @@ a{color:var(--gold)}
     <p class="state" data-words>Non vi promettiamo il mondo. Vi portiamo [cose] [vere.]</p>
     <div class="idx" id="idx">
       <button type="button" data-go="#sos">S.O.S. Nova Severi</button>
+      <button type="button" data-go="#libri">Libri che durano</button>
       <button type="button" data-go="#settimana">Settimana dello studente</button>
       <button type="button" data-go="#alpha">Alpha League</button>
       <button type="button" data-go="#bagni">Bagni</button>
@@ -578,8 +609,30 @@ a{color:var(--gold)}
     <a class="btn" href="https://sos-nova-severi.vercel.app" target="_blank" rel="noopener">Apri S.O.S. Nova Severi →</a>
   </div>
 </section>
+<!-- ======= 2. LIBRI ======= -->
+<section class="ch ch--night" id="libri" data-ch="Libri che durano">
+  <div class="wrap">
+    <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
+    <h2 class="title">Libri che<br><span class="g">durano</span></h2>
+    <p class="lead">Il libro di tuo fratello, di una cugina o di un amico dell'anno prima? Troppo spesso non vale più: è cambiato, a volte solo l'edizione. E va comprato nuovo.</p>
+    <div class="bopts" id="bopts" role="tablist">
+      <button type="button" class="on" data-m="0" role="tab" aria-selected="true">Oggi</button>
+      <button type="button" data-m="1" role="tab" aria-selected="false">Con Nova Severi</button>
+    </div>
+    <div class="bk-stage" id="bkStage">
+      <div class="bk-who l"><span class="av">🧑</span>Tuo fratello<small>l'anno scorso</small></div>
+      <div class="bk-book" id="bkBook"><span>FISICA</span><i>Ed. 2025</i></div>
+      <div class="bk-who r"><span class="av">🎒</span>Tu<small>quest'anno</small></div>
+      <div class="bk-verdict bad" id="bkVerdict">Nuova edizione:<br>ricompralo</div>
+    </div>
+    <button class="mini" id="bkGo" type="button">Passa il libro</button>
+    <p class="note">Fino al 2012 un libro adottato restava per sei anni. Oggi una scuola può cambiarlo ogni anno. Proponiamo che il Severi si dia una regola: <b>un libro resta per un numero minimo di anni</b>, salvo motivi seri, e se esce solo una nuova edizione con gli stessi contenuti si può usare quella vecchia.</p>
+    <p class="note">I libri li sceglie il Collegio dei docenti a maggio, dopo aver sentito i consigli di classe. La proposta la portiamo lì e in Consiglio d'istituto. Non costa niente alla scuola, e fa risparmiare ogni famiglia.</p>
+  </div>
+</section>
+
 <!-- ======= 2. SETTIMANA ======= -->
-<section class="ch ch--night" id="settimana" data-ch="Settimana dello studente">
+<section class="ch ch--brand" id="settimana" data-ch="Settimana dello studente">
   <div class="wrap">
     <p class="kicker">La proponiamo all'assemblea</p>
     <h2 class="title">Settimana<br>dello <span class="g">studente</span></h2>
@@ -593,7 +646,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 3. ALPHA ======= -->
-<section class="ch ch--brand" id="alpha" data-ch="Alpha League">
+<section class="ch ch--night" id="alpha" data-ch="Alpha League">
   <div class="wrap">
     <div class="trio">
       <img src="assets/logo-alpha-league.webp" alt="Alpha League" width="240" height="240">
@@ -634,7 +687,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 4. BAGNI ======= -->
-<section class="ch ch--night" id="bagni" data-ch="Bagni">
+<section class="ch ch--brand" id="bagni" data-ch="Bagni">
   <div class="wrap">
     <p class="kicker">Bagni</p>
     <h2 class="title">Il minimo,<br><span class="g">sempre.</span></h2>
@@ -657,7 +710,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 5. SPORT ======= -->
-<section class="ch ch--brand" id="sport" data-ch="Sport per tutti">
+<section class="ch ch--night" id="sport" data-ch="Sport per tutti">
   <div class="wrap">
     <p class="kicker">Sport per tutti</p>
     <h2 class="title">Panchina<br><span class="g">Severi</span></h2>
@@ -676,14 +729,14 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 6. FONDI ======= -->
-<section class="ch ch--night" id="fondi" data-ch="Raccolta fondi">
+<section class="ch ch--brand" id="fondi" data-ch="Raccolta fondi">
   <div class="wrap">
     <p class="kicker">Per la nostra scuola</p>
     <h2 class="title">Raccolta<br><span class="g">fondi</span></h2>
-    <p class="lead">Una raccolta fondi per il Severi, grazie agli sponsor di grandi aziende e a un fondo benefico aperto a tutti.</p>
+    <p class="lead">La raccolta fondi del Severi esiste già: noi le diamo forza. Porteremo le grandi aziende grazie ai nostri progetti più visibili, come l'Alpha League e la Nova Severi Card, e la faremo conoscere a tutti.</p>
     <div class="fund">
       <div class="fund-btns">
-        <button class="fbtn" type="button" data-v="14" data-s="30"><b>Sponsor</b><small>Le grandi aziende</small></button>
+        <button class="fbtn" type="button" data-v="14" data-s="30"><b>Sponsor</b><small>Grandi aziende, attirate dai nostri progetti</small></button>
         <button class="fbtn" type="button" data-v="5" data-s="20"><b>Fondo aperto a tutti</b><small>Chiunque può dare una mano</small></button>
       </div>
       <div class="jar-wrap" id="jarWrap">
@@ -696,7 +749,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 7. CARD ======= -->
-<section class="ch ch--brand" id="card" data-ch="Nova Severi Card">
+<section class="ch ch--night" id="card" data-ch="Nova Severi Card">
   <div class="wrap">
     <p class="kicker">Sconti per gli studenti del Severi</p>
     <h2 class="title">Nova Severi<br><span class="g">Card</span></h2>
@@ -711,9 +764,10 @@ a{color:var(--gold)}
         <div class="nc-glare"></div>
       </div>
     </div>
-    <p class="hint">Muovi il dito sulla tessera. Poi tocca i loghi qui sotto.</p>
-    <div class="pond" id="pond"></div>
-    <p class="pond-cap" id="pondCap" aria-live="polite"></p>
+    <p class="hint">Muovi il dito sulla tessera. Poi scorri i loghi qui sotto.</p>
+    <div class="lc" id="lc"><div class="lc-track" id="lcTrack" aria-label="Negozi convenzionati: scorri"></div></div>
+    <div class="lc-info" id="lcInfo" aria-live="polite"><span class="lc-k" id="lcK"></span><b id="lcName"></b><strong id="lcOff"></strong><span id="lcDet"></span></div>
+    <div class="lc-dots" id="lcDots" aria-hidden="true"></div>
     <p class="more">…e tante altre convenzioni <span>in arrivo.</span></p>
     <div class="calc" id="calc">
       <h3>Quanto risparmi?</h3>
@@ -739,7 +793,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 8. FELPA ======= -->
-<section class="ch ch--night" id="felpa" data-ch="Merch del Severi">
+<section class="ch ch--brand" id="felpa" data-ch="Merch del Severi">
   <div class="wrap">
     <p class="kicker">Merch della scuola</p>
     <h2 class="title">Il merch<br>del <span class="g">Severi</span></h2>
@@ -768,7 +822,7 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 9. RINFRESCO ======= -->
-<section class="ch ch--brand" id="rinfresco" data-ch="Rinfresco di Natale">
+<section class="ch ch--night" id="rinfresco" data-ch="Rinfresco di Natale">
   <div class="snow" id="snow"></div>
   <div class="wrap">
     <p class="kicker">Prima delle vacanze di Natale</p>
@@ -788,7 +842,7 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 10. RICREAZIONE ======= -->
-<section class="ch ch--night" id="ricreazione" data-ch="Ricreazione">
+<section class="ch ch--brand" id="ricreazione" data-ch="Ricreazione">
   <div class="wrap">
     <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
     <h2 class="title">Più<br><span class="g">ricreazione</span></h2>
@@ -823,7 +877,7 @@ a{color:var(--gold)}
   </div>
 </div>
 <!-- ======= 11. TORNEI ======= -->
-<section class="ch ch--brand" id="tornei" data-ch="Tornei">
+<section class="ch ch--night" id="tornei" data-ch="Tornei">
   <div class="wrap">
     <p class="kicker">Sport per tutti</p>
     <h2 class="title">Tornei di<br><span class="g">tutti gli sport</span></h2>
@@ -839,7 +893,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 12. JOLLY ======= -->
-<section class="ch ch--night" id="jolly" data-ch="Jolly Severi">
+<section class="ch ch--brand" id="jolly" data-ch="Jolly Severi">
   <div class="wrap">
     <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
     <h2 class="title">Jolly<br><span class="g">Severi</span></h2>
@@ -875,7 +929,7 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 13. FESTE ======= -->
-<section class="ch ch--brand" id="feste" data-ch="Feste d'istituto">
+<section class="ch ch--night" id="feste" data-ch="Feste d'istituto">
   <div class="wrap">
     <p class="kicker">In collaborazione con Mattia De Persiis</p>
     <h2 class="title">Feste<br><span class="g">d'istituto</span></h2>
@@ -893,7 +947,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 10. COME SI VOTA ======= -->
-<section class="ch ch--night" id="voto" data-ch="Come si vota">
+<section class="ch ch--brand" id="voto" data-ch="Come si vota">
   <div class="wrap">
     <div class="when"><span>Giovedì 29 ottobre</span><span>In classe</span><span>Ore 9–10</span></div>
     <h2 class="title">Come si <span class="g">vota</span></h2>
@@ -924,7 +978,7 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 11. FINE ======= -->
-<section class="ch ch--brand" id="fine" data-ch="Nova Severi">
+<section class="ch ch--night" id="fine" data-ch="Nova Severi">
   <div class="wrap">
     <svg class="fstar" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C53 36 64 47 100 50C64 53 53 64 50 100C47 64 36 53 0 50C36 47 47 36 50 0Z"/></svg>
     <p class="fine-t">Il futuro del Severi parte dalla <span>tua X</span></p>
@@ -1116,70 +1170,57 @@ a{color:var(--gold)}
   ['pointerleave', 'pointerup', 'pointercancel'].forEach(ev => stage.addEventListener(ev, untilt));
   if (RM) ncard.classList.remove('idle');
 
-  /* ---------- CARD: loghi che galleggiano ---------- */
+  /* ---------- CARD: carosello dei negozi ---------- */
   // Per aggiungere un negozio: metti il logo in assets/ e aggiungi una riga qui.
   const PARTNERS = [
-    { id: 'smash-tag', name: 'Smash Tag', gold: true, note: 'Smash Tag · nuova collaborazione: 20% di sconto con la Card' },
-    { id: 'caffe-piave', name: 'Caffè Piave' },
-    { id: 'minotti', name: 'Caffè Minotti' },
-    { id: 'papo', name: 'Papò' },
-    { id: 'europa-padel', name: 'Europa Padel' },
-    { id: 'giusto-make-up', name: 'Giusto Make Up' },
-    { id: 'voglia-di-studiare', name: 'Voglia di Studiare' },
-    { id: 'platinum', name: 'Platinum' },
-    { id: 'barberia', name: "Barberia dell'Angolo" },
-    { id: 'otovision', name: 'Otovision' }
+    { id: 'smash-tag', name: 'Smash Tag', off: '-20%', det: 'Con la Nova Severi Card.', k: 'Nuova collaborazione', gold: true },
+    { id: 'minotti', name: 'Caffè Minotti', off: '-20%', det: 'Su colazioni, pranzi e cene.' },
+    { id: 'otovision', name: 'Otovision', off: '-20%', det: 'Su occhiali e prodotti.' },
+    { id: 'papo', name: 'Papò', off: '-15%', det: 'Dalle 18 alla chiusura.' },
+    { id: 'europa-padel', name: 'Europa Padel', off: '-4€', det: 'A persona sulle partite dalle 9 alle 18, con racchetta, palline e acqua compresi. Lezioni di gruppo a 10€ invece di 15.' },
+    { id: 'barberia', name: "Barberia dell'Angolo", off: '-5€', det: 'Su ogni taglio.' },
+    { id: 'giusto-make-up', name: 'Giusto Make Up', off: '-20%', det: 'Su tutto.' },
+    { id: 'voglia-di-studiare', name: 'Voglia di Studiare', off: '-20%', det: 'Sulle prime 5 lezioni di ripetizione, di ogni materia.' },
+    { id: 'platinum', name: 'Platinum', off: '5–10%', det: 'Di sconto sui capi di abbigliamento.' },
+    { id: 'caffe-piave', name: 'Caffè Piave', off: 'Prezzi speciali', det: 'Cappuccino e cornetto a 2,80€, menù pranzo completo a 9,50€.' }
   ];
-  const pond = $('#pond'), cap = $('#pondCap');
-  const bodies = PARTNERS.map((p, i) => {
-    const el = document.createElement('button'); el.type = 'button'; el.className = 'pl' + (p.gold ? ' gold' : ''); el.setAttribute('aria-label', p.name);
-    el.innerHTML = `<img src="assets/logo-${p.id}.webp" alt="" width="220" height="220" loading="lazy">`;
-    pond.appendChild(el);
-    return { el, name: p.name, note: p.note, x: 0, y: 0, vx: 0, vy: 0, i };
-  });
-  let W = 0, H = 0, R = 34, pondVis = false, placed = false;
-  function pondMeasure() {
-    const r = pond.getBoundingClientRect(); W = r.width; H = r.height;
-    R = parseFloat(getComputedStyle(pond).getPropertyValue('--lr')) || 34;
-    if (!placed && W > 0) {
-      placed = true;
-      bodies.forEach((b, i) => {
-        const a = (i / bodies.length) * Math.PI * 2 - Math.PI / 2;
-        b.x = W / 2 + Math.cos(a) * (W / 2 - R - 6); b.y = H / 2 + Math.sin(a) * (H / 2 - R - 6);
-        const d = Math.random() * Math.PI * 2; b.vx = Math.cos(d) * 0.4; b.vy = Math.sin(d) * 0.4;
-      });
-    }
-    bodies.forEach(b => { b.x = clamp(b.x, R, W - R); b.y = clamp(b.y, R, H - R); });
-    render();
+  const track = $('#lcTrack'), info = $('#lcInfo'), dots = $('#lcDots');
+  track.innerHTML = PARTNERS.map((p, i) => `<button type="button" class="lc-item${p.gold ? ' gold' : ''}" data-i="${i}" aria-label="${p.name}"><img src="assets/logo-${p.id}.webp" alt="" width="220" height="220"></button>`).join('');
+  dots.innerHTML = PARTNERS.map(() => '<i></i>').join('');
+  const items = $$('.lc-item', track), dotEls = $$('i', dots);
+  let cur = -1, lcTick = false;
+  function showInfo(i) {
+    if (i === cur) return; cur = i; const p = PARTNERS[i];
+    $('#lcK').textContent = p.k || ''; $('#lcName').textContent = p.name; $('#lcOff').textContent = p.off; $('#lcDet').textContent = p.det;
+    info.classList.remove('chg'); void info.offsetWidth; info.classList.add('chg');
+    dotEls.forEach((d, j) => d.classList.toggle('on', j === i));
   }
-  function render() { for (const b of bodies) b.el.style.transform = `translate(${b.x - R}px,${b.y - R}px)`; }
-  function step() {
-    for (const b of bodies) {
-      b.x += b.vx; b.y += b.vy;
-      if (b.x < R) { b.x = R; b.vx = Math.abs(b.vx); } else if (b.x > W - R) { b.x = W - R; b.vx = -Math.abs(b.vx); }
-      if (b.y < R) { b.y = R; b.vy = Math.abs(b.vy); } else if (b.y > H - R) { b.y = H - R; b.vy = -Math.abs(b.vy); }
-      const sp = Math.hypot(b.vx, b.vy) || 0.001, k = 1 + (0.42 - sp) / sp * 0.03; b.vx *= k; b.vy *= k;
-    }
-    for (let i = 0; i < bodies.length; i++) for (let j = i + 1; j < bodies.length; j++) {
-      const a = bodies[i], c = bodies[j]; const dx = a.x - c.x, dy = a.y - c.y, d = Math.hypot(dx, dy) || 1;
-      if (d < 2 * R) {
-        const nx = dx / d, ny = dy / d, o = (2 * R - d) / 2;
-        a.x += nx * o; a.y += ny * o; c.x -= nx * o; c.y -= ny * o;
-        const vn = (a.vx - c.vx) * nx + (a.vy - c.vy) * ny;
-        if (vn < 0) { a.vx -= vn * nx; a.vy -= vn * ny; c.vx += vn * nx; c.vy += vn * ny; }
-      }
-    }
-    render();
+  function lcUpdate() {
+    lcTick = false;
+    let best = 0, bd = 1e9;
+    items.forEach((it, i) => {
+      const d = Math.abs((it.offsetLeft + it.offsetWidth / 2 - track.scrollLeft) - track.clientWidth / 2) / 112;
+      it.style.setProperty('--s', (1.45 - Math.min(d, 2) * 0.33).toFixed(3));
+      it.style.setProperty('--o', (1 - Math.min(d, 2) * 0.3).toFixed(3));
+      if (d < bd) { bd = d; best = i; }
+    });
+    showInfo(best);
   }
-  function ploop() { if (!pondVis) return; step(); requestAnimationFrame(ploop); }
-  new IntersectionObserver(([e]) => { pondVis = e.isIntersecting; pondMeasure(); if (pondVis && !RM) requestAnimationFrame(ploop); }).observe(pond);
-  addEventListener('resize', pondMeasure);
+  track.addEventListener('scroll', () => { if (!lcTick) { lcTick = true; requestAnimationFrame(lcUpdate); } }, { passive: true });
+  function goTo(i, smooth = true) { const it = items[i]; track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: smooth && !RM ? 'smooth' : 'auto' }); }
+  items.forEach((it, i) => it.addEventListener('click', () => { goTo(i); swipeCard(); stopAuto(); }));
+  addEventListener('resize', () => goTo(Math.max(cur, 0), false));
+  // scorre da solo finché nessuno lo tocca
+  let auto = null, lcVis = false, touched = false;
+  function stopAuto() { touched = true; clearInterval(auto); auto = null; }
+  ['pointerdown', 'touchstart', 'wheel'].forEach(ev => track.addEventListener(ev, stopAuto, { passive: true }));
+  new IntersectionObserver(([e]) => {
+    lcVis = e.isIntersecting;
+    if (lcVis && !touched && !RM && !auto) auto = setInterval(() => { if (lcVis) goTo((cur + 1) % items.length); }, 2600);
+    if (!lcVis && auto) { clearInterval(auto); auto = null; }
+  }).observe(track);
+  requestAnimationFrame(() => { goTo(0, false); lcUpdate(); });
   function swipeCard() { ncard.classList.remove('idle', 'swipe'); void ncard.offsetWidth; ncard.classList.add('swipe'); setTimeout(() => { ncard.classList.remove('swipe'); if (!RM) ncard.classList.add('idle'); }, 720); }
-  function hit(el) { el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit'); }
-  bodies.forEach(b => b.el.addEventListener('click', () => {
-    const a = Math.random() * Math.PI * 2; b.vx += Math.cos(a) * 2.4; b.vy += Math.sin(a) * 2.4;
-    hit(b.el); swipeCard(); cap.textContent = b.note || `${b.name} · in convenzione con la Card`;
-  }));
 
   /* ---------- CARD: quanto risparmi ---------- */
   // Solo sconti già annunciati. Per aggiungerne uno: nuovo cursore nell'HTML + una riga qui.
@@ -1197,6 +1238,24 @@ a{color:var(--gold)}
   }
   SAVE.forEach(s => $('#s-' + s.id).addEventListener('input', calc));
   calc();
+
+  /* ---------- LIBRI ---------- */
+  (() => {
+    const st = $('#bkStage'), go = $('#bkGo'), v = $('#bkVerdict'), tabs = $$('#bopts button');
+    let mode = 0;
+    function reset() { st.classList.remove('go'); go.textContent = 'Passa il libro'; }
+    function setMode(m) {
+      mode = m; reset();
+      tabs.forEach((t, j) => { t.classList.toggle('on', j === m); t.setAttribute('aria-selected', j === m); });
+      v.className = 'bk-verdict ' + (m ? 'ok' : 'bad');
+      v.innerHTML = m ? 'Va ancora bene ✓' : 'Nuova edizione:<br>ricompralo';
+    }
+    tabs.forEach((t, j) => t.addEventListener('click', () => setMode(j)));
+    go.addEventListener('click', () => {
+      if (st.classList.contains('go')) { reset(); return; }
+      st.classList.add('go'); go.textContent = 'Riprova';
+    });
+  })();
 
   /* ---------- SETTIMANA DELLO STUDENTE ---------- */
   const ACTS = [['⚽', 'Tornei'], ['💻', 'Corsi tra studenti'], ['🎓', 'Orientamento'], ['🎬', 'Cineforum'], ['♟️', 'Scacchi e giochi'], ['🎸', 'Concerto'], ['🎤', 'Ospiti'], ['❤️', 'Primo soccorso']];
