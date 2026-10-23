@@ -442,20 +442,6 @@ a{color:var(--gold)}
 @keyframes drop{to{transform:translateY(var(--dy)) rotate(260deg);opacity:.9}}
 .fund-msg{margin:0;min-height:1.4em;font:800 22px/1.15 var(--f-display);text-transform:uppercase;color:var(--gold)}
 
-/* ---------- rinfresco ---------- */
-.snow{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.snow i{position:absolute;top:-10px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.75);animation:snow linear infinite}
-@keyframes snow{to{transform:translate(30px,1400px)}}
-.foods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.food{display:grid;justify-items:center;gap:6px;padding:12px 4px;border-radius:16px;background:rgba(6,14,27,.3);border:1.5px solid rgba(255,255,255,.4);font:700 13px/1.1 var(--f-body)}
-.food span{font-size:30px;line-height:1}
-.food.on{background:var(--gold);color:var(--ink);border-color:var(--gold)}
-.banco{position:relative;min-height:120px;border-radius:12px;background:linear-gradient(180deg,#C8915A,#9C6A3C);box-shadow:inset 0 -10px 0 rgba(0,0,0,.18),0 18px 34px rgba(0,0,0,.3);display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:4px 10px;padding:16px 12px 24px}
-.banco .it{font-size:40px;line-height:1;animation:land .45s cubic-bezier(.2,1.5,.4,1) both}
-@keyframes land{from{transform:translateY(-60px) scale(.6);opacity:0}}
-.banco .empty{font:600 13px/1.3 var(--f-mono);color:rgba(255,255,255,.85)}
-.r-msg{margin:0;min-height:1.3em;font:800 22px/1.15 var(--f-display);text-transform:uppercase;color:var(--white)}
-
 /* ---------- ricreazione ---------- */
 .poll{display:grid;gap:12px}
 .pchoice{position:relative;display:grid;grid-template-columns:56px 1fr;grid-template-rows:auto auto;column-gap:14px;row-gap:4px;align-items:center;text-align:left;padding:18px 16px;border-radius:20px;background:var(--navy);border:2px solid var(--line);transition:border-color .25s,background .25s,opacity .25s,transform .25s}
@@ -553,7 +539,6 @@ a{color:var(--gold)}
       <button type="button" data-go="#fondi">Raccolta fondi</button>
       <button type="button" data-go="#card">Nova Severi Card</button>
       <button type="button" data-go="#felpa">Merch del Severi</button>
-      <button type="button" data-go="#rinfresco">Rinfresco di Natale</button>
       <button type="button" data-go="#ricreazione">Ricreazione</button>
       <button type="button" data-go="#tornei">Tornei</button>
       <button type="button" data-go="#jolly">Jolly Severi</button>
@@ -844,28 +829,8 @@ a{color:var(--gold)}
   </div>
 </section>
 
-<!-- ======= 9. RINFRESCO ======= -->
-<section class="ch ch--night" id="rinfresco" data-ch="Rinfresco di Natale">
-  <div class="snow" id="snow"></div>
-  <div class="wrap">
-    <p class="kicker">Prima delle vacanze di Natale</p>
-    <h2 class="title">Il rinfresco<br><span class="g">di Natale</span></h2>
-    <p class="lead">L'ultimo giorno prima delle vacanze di Natale ogni classe organizza il suo rinfresco. Ognuno porta qualcosa.</p>
-    <div class="banco" id="banco"><span class="empty">Il banco è vuoto. Porta qualcosa!</span></div>
-    <div class="foods" id="foods">
-      <button class="food" type="button" data-e="🍕"><span>🍕</span>Pizza</button>
-      <button class="food" type="button" data-e="🍰"><span>🍰</span>Dolci</button>
-      <button class="food" type="button" data-e="🥤"><span>🥤</span>Bibite</button>
-      <button class="food" type="button" data-e="🥨"><span>🥨</span>Snack</button>
-      <button class="food" type="button" data-e="🍊"><span>🍊</span>Frutta</button>
-      <button class="food" type="button" data-e="🎄"><span>🎄</span>Addobbi</button>
-    </div>
-    <p class="r-msg" id="rMsg" aria-live="polite"></p>
-  </div>
-</section>
-
 <!-- ======= 10. RICREAZIONE ======= -->
-<section class="ch ch--brand" id="ricreazione" data-ch="Ricreazione">
+<section class="ch ch--night" id="ricreazione" data-ch="Ricreazione">
   <div class="wrap">
     <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
     <h2 class="title">Più<br><span class="g">ricreazione</span></h2>
@@ -900,7 +865,7 @@ a{color:var(--gold)}
   </div>
 </div>
 <!-- ======= 11. TORNEI ======= -->
-<section class="ch ch--night" id="tornei" data-ch="Tornei">
+<section class="ch ch--brand" id="tornei" data-ch="Tornei">
   <div class="wrap">
     <p class="kicker">Sport per tutti</p>
     <h2 class="title">Tornei di<br><span class="g">tutti gli sport</span></h2>
@@ -916,7 +881,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 12. JOLLY ======= -->
-<section class="ch ch--brand" id="jolly" data-ch="Jolly Severi">
+<section class="ch ch--night" id="jolly" data-ch="Jolly Severi">
   <div class="wrap">
     <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
     <h2 class="title">Jolly<br><span class="g">Severi</span></h2>
@@ -952,7 +917,7 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 13. FESTE ======= -->
-<section class="ch ch--night" id="feste" data-ch="Feste d'istituto">
+<section class="ch ch--brand" id="feste" data-ch="Feste d'istituto">
   <div class="wrap">
     <p class="kicker">In collaborazione con Mattia De Persiis</p>
     <h2 class="title">Feste<br><span class="g">d'istituto</span></h2>
@@ -970,7 +935,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 10. COME SI VOTA ======= -->
-<section class="ch ch--brand" id="voto" data-ch="Come si vota">
+<section class="ch ch--night" id="voto" data-ch="Come si vota">
   <div class="wrap">
     <div class="when"><span>Giovedì 29 ottobre</span><span>In classe</span><span>Ore 9–10</span></div>
     <h2 class="title">Come si <span class="g">vota</span></h2>
@@ -1001,7 +966,7 @@ a{color:var(--gold)}
 </section>
 
 <!-- ======= 11. FINE ======= -->
-<section class="ch ch--night" id="fine" data-ch="Nova Severi">
+<section class="ch ch--brand" id="fine" data-ch="Nova Severi">
   <div class="wrap">
     <svg class="fstar" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C53 36 64 47 100 50C64 53 53 64 50 100C47 64 36 53 0 50C36 47 47 36 50 0Z"/></svg>
     <p class="fine-t">Il futuro del Severi parte dalla <span>tua X</span></p>
@@ -1445,20 +1410,6 @@ a{color:var(--gold)}
       wrap.appendChild(c);
       setTimeout(() => { c.remove(); L = Math.min(100, L + +b.dataset.v); lvl.style.height = L * .9 + '%';
         if (L >= 100) { msg.textContent = 'Pieno! Tutto per il Severi.'; $$('#fondi .fbtn').forEach(x => { x.disabled = true; }); } }, RM ? 0 : 680);
-    }));
-  })();
-
-  /* ---------- RINFRESCO ---------- */
-  (() => {
-    const snow = $('#snow');
-    if (!RM) for (let i = 0; i < 22; i++) { const f = document.createElement('i'); f.style.left = Math.random() * 100 + '%'; f.style.animationDuration = (9 + Math.random() * 9) + 's'; f.style.animationDelay = (-Math.random() * 18) + 's'; f.style.opacity = .35 + Math.random() * .6; snow.appendChild(f); }
-    const banco = $('#banco'), rMsg = $('#rMsg'); const got = new Set();
-    $$('#foods .food').forEach(b => b.addEventListener('click', () => {
-      const e = b.dataset.e;
-      if (got.has(e)) { got.delete(e); b.classList.remove('on'); }
-      else { got.add(e); b.classList.add('on'); }
-      banco.innerHTML = got.size ? [...got].map(x => `<span class="it">${x}</span>`).join('') : '<span class="empty">Il banco è vuoto. Porta qualcosa!</span>';
-      rMsg.textContent = got.size >= 4 ? 'Buone feste, Severi!' : '';
     }));
   })();
 
