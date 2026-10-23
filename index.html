@@ -122,11 +122,12 @@ a{color:var(--gold)}
 @keyframes flash{30%{box-shadow:inset 0 0 0 2px #fff,inset 0 0 120px rgba(255,214,102,.75),0 20px 50px rgba(0,0,0,.3)}}
 .spark{position:absolute;width:8px;height:8px;border-radius:2px;pointer-events:none;animation:spark .9s ease-out forwards}
 @keyframes spark{to{transform:translate(var(--dx),var(--dy)) rotate(260deg);opacity:0}}
-.stirpe{position:relative;border-radius:20px;padding:26px 20px;min-height:190px;align-content:end;text-align:center;background:linear-gradient(180deg,rgba(6,14,27,.25),rgba(6,14,27,.85)),url("assets/stirpe.webp") center/cover,var(--night);border:1px solid var(--line);overflow:hidden;display:grid;gap:6px}
+.stirpe{position:relative;border-radius:20px;padding:22px 20px;min-height:270px;align-content:start;text-align:center;background:linear-gradient(180deg,rgba(6,14,27,.9) 0%,rgba(6,14,27,.55) 38%,rgba(6,14,27,0) 62%),url("assets/stirpe.webp") center bottom/cover,var(--night);border:1px solid var(--line);overflow:hidden;display:grid;gap:6px}
 .stirpe .beam{position:absolute;top:-30%;width:42%;height:160%;background:linear-gradient(180deg,rgba(255,240,190,.55),transparent 70%);filter:blur(6px);opacity:.12;transition:opacity .8s ease,transform 1.2s ease}
 .stirpe .b1{left:-6%;transform:rotate(-22deg)} .stirpe .b2{right:-6%;transform:rotate(22deg)}
 .stirpe.on .beam{opacity:.9}
 .stirpe.on .b1{transform:rotate(-12deg)} .stirpe.on .b2{transform:rotate(12deg)}
+.stirpe .cr{position:absolute;right:10px;bottom:8px;font:500 9px/1 var(--f-body);letter-spacing:.02em;text-transform:none;color:rgba(255,255,255,.75);text-shadow:0 1px 2px rgba(0,0,0,.6)}
 .stirpe small{position:relative;font:700 12px/1 var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--ice)}
 .stirpe strong{position:relative;font:900 clamp(30px,9vw,46px)/.95 var(--f-display);text-transform:uppercase;color:var(--white);transition:color .6s}
 .stirpe.on strong{color:var(--gold)}
@@ -667,6 +668,7 @@ a{color:var(--gold)}
       <i class="beam b1"></i><i class="beam b2"></i>
       <small>La finale si gioca allo</small>
       <strong>Stadio Benito Stirpe</strong>
+      <small class="cr">Foto: Facebook @Frosinone1928</small>
     </div>
     <ul class="facts">
       <li><span><b>Squadre</b> selezionate da noi</span></li>
