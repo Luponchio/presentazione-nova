@@ -543,11 +543,11 @@ a{color:var(--gold)}
     <p class="state" data-words>Non vi promettiamo il mondo. Vi portiamo [cose] [vere.]</p>
     <div class="idx" id="idx">
       <button type="button" data-go="#sos">S.O.S. Nova Severi</button>
-      <button type="button" data-go="#libri">Libri che durano</button>
       <button type="button" data-go="#settimana">Settimana dello studente</button>
       <button type="button" data-go="#alpha">Alpha League</button>
       <button type="button" data-go="#bagni">Bagni</button>
       <button type="button" data-go="#sport">Panchina Severi</button>
+      <button type="button" data-go="#libri">Libri che durano</button>
       <button type="button" data-go="#fondi">Raccolta fondi</button>
       <button type="button" data-go="#card">Nova Severi Card</button>
       <button type="button" data-go="#felpa">Merch del Severi</button>
@@ -622,30 +622,8 @@ a{color:var(--gold)}
     <a class="btn" href="https://sos-nova-severi.vercel.app" target="_blank" rel="noopener">Apri S.O.S. Nova Severi →</a>
   </div>
 </section>
-<!-- ======= 2. LIBRI ======= -->
-<section class="ch ch--night" id="libri" data-ch="Libri che durano">
-  <div class="wrap">
-    <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
-    <h2 class="title">Libri che<br><span class="g">durano</span></h2>
-    <p class="lead">Il libro di tuo fratello, di una cugina o di un amico dell'anno prima? Troppo spesso non vale più: è cambiato, a volte solo l'edizione. E va comprato nuovo.</p>
-    <div class="bopts" id="bopts" role="tablist">
-      <button type="button" class="on" data-m="0" role="tab" aria-selected="true">Oggi</button>
-      <button type="button" data-m="1" role="tab" aria-selected="false">Con Nova Severi</button>
-    </div>
-    <div class="bk-stage" id="bkStage">
-      <div class="bk-who l"><span class="av">🧑</span>Tuo fratello<small>l'anno scorso</small></div>
-      <div class="bk-book" id="bkBook" role="button" tabindex="0" aria-label="Passa il libro"><span>FISICA</span><i>Ed. 2025</i></div>
-      <div class="bk-who r"><span class="av">🎒</span>Tu<small>quest'anno</small></div>
-      <div class="bk-verdict bad" id="bkVerdict">Nuova edizione:<br>ricompralo</div>
-    </div>
-    <button class="mini" id="bkGo" type="button">Passa il libro</button>
-    <p class="note">Fino al 2012 un libro adottato restava per sei anni. Oggi una scuola può cambiarlo ogni anno. Proponiamo che il Severi si dia una regola: <b>un libro resta per un numero minimo di anni</b>, salvo motivi seri, e se esce solo una nuova edizione con gli stessi contenuti si può usare quella vecchia.</p>
-    <p class="note">I libri li sceglie il Collegio dei docenti a maggio, dopo aver sentito i consigli di classe. La proposta la portiamo lì e in Consiglio d'istituto. Non costa niente alla scuola, e fa risparmiare ogni famiglia.</p>
-  </div>
-</section>
-
 <!-- ======= 2. SETTIMANA ======= -->
-<section class="ch ch--brand" id="settimana" data-ch="Settimana dello studente">
+<section class="ch ch--night" id="settimana" data-ch="Settimana dello studente">
   <div class="wrap">
     <p class="kicker">La proponiamo all'assemblea</p>
     <h2 class="title">Settimana<br>dello <span class="g">studente</span></h2>
@@ -659,7 +637,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 3. ALPHA ======= -->
-<section class="ch ch--night" id="alpha" data-ch="Alpha League">
+<section class="ch ch--brand" id="alpha" data-ch="Alpha League">
   <div class="wrap">
     <div class="trio">
       <img src="assets/logo-alpha-league.webp" alt="Alpha League" width="240" height="240">
@@ -700,7 +678,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 4. BAGNI ======= -->
-<section class="ch ch--brand" id="bagni" data-ch="Bagni">
+<section class="ch ch--night" id="bagni" data-ch="Bagni">
   <div class="wrap">
     <p class="kicker">Bagni</p>
     <h2 class="title">Il minimo,<br><span class="g">sempre.</span></h2>
@@ -723,7 +701,7 @@ a{color:var(--gold)}
   </div>
 </section>
 <!-- ======= 5. SPORT ======= -->
-<section class="ch ch--night" id="sport" data-ch="Sport per tutti">
+<section class="ch ch--brand" id="sport" data-ch="Sport per tutti">
   <div class="wrap">
     <p class="kicker">Sport per tutti</p>
     <h2 class="title">Panchina<br><span class="g">Severi</span></h2>
@@ -738,6 +716,28 @@ a{color:var(--gold)}
       </div>
     </div>
     <p class="note">Lo apriamo subito dopo il voto.</p>
+  </div>
+</section>
+
+<!-- ======= 2. LIBRI ======= -->
+<section class="ch ch--night" id="libri" data-ch="Libri che durano">
+  <div class="wrap">
+    <p class="kicker">Lo portiamo in Consiglio d'istituto</p>
+    <h2 class="title">Libri che<br><span class="g">durano</span></h2>
+    <p class="lead">Il libro di tuo fratello, di una cugina o di un amico dell'anno prima? Troppo spesso non vale più: è cambiato, a volte solo l'edizione. E va comprato nuovo.</p>
+    <div class="bopts" id="bopts" role="tablist">
+      <button type="button" class="on" data-m="0" role="tab" aria-selected="true">Oggi</button>
+      <button type="button" data-m="1" role="tab" aria-selected="false">Con Nova Severi</button>
+    </div>
+    <div class="bk-stage" id="bkStage">
+      <div class="bk-who l"><span class="av">🧑</span>Tuo fratello<small>l'anno scorso</small></div>
+      <div class="bk-book" id="bkBook" role="button" tabindex="0" aria-label="Passa il libro"><span>FISICA</span><i>Ed. 2025</i></div>
+      <div class="bk-who r"><span class="av">🎒</span>Tu<small>quest'anno</small></div>
+      <div class="bk-verdict bad" id="bkVerdict">Nuova edizione:<br>ricompralo</div>
+    </div>
+    <button class="mini" id="bkGo" type="button">Passa il libro</button>
+    <p class="note">Fino al 2012 un libro adottato restava per sei anni. Oggi una scuola può cambiarlo ogni anno. Proponiamo che il Severi si dia una regola: <b>un libro resta per un numero minimo di anni</b>, salvo motivi seri, e se esce solo una nuova edizione con gli stessi contenuti si può usare quella vecchia.</p>
+    <p class="note">I libri li sceglie il Collegio dei docenti a maggio, dopo aver sentito i consigli di classe. La proposta la portiamo lì e in Consiglio d'istituto. Non costa niente alla scuola, e fa risparmiare ogni famiglia.</p>
   </div>
 </section>
 
