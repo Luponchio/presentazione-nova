@@ -1202,12 +1202,18 @@ a{color:var(--gold)}
     { id: 'caffe-piave', name: 'Caffè Piave', off: 'Prezzi speciali', det: '' }
   ];
   const track = $('#lcTrack'), info = $('#lcInfo'), dots = $('#lcDots');
-  track.innerHTML = PARTNERS.map((p, i) => `<button type="button" class="lc-item${p.gold ? ' gold' : ''}" data-i="${i}" aria-label="${p.name}"><img src="assets/logo-${p.id}.webp" alt="" width="220" height="220"></button>`).join('');
+  // Giro infinito: la fila dei negozi è ripetuta 5 volte e si parte da Smash Tag nella copia centrale.
+  // Quando il carosello si ferma su una copia esterna, salta senza animazione al negozio uguale della copia centrale.
+  const N = PARTNERS.length, COPIES = 5, MID = 2;
+  track.innerHTML = Array.from({ length: COPIES * N }, (_, g) => {
+    const p = PARTNERS[g % N], side = Math.floor(g / N) !== MID;
+    return `<button type="button" class="lc-item${p.gold ? ' gold' : ''}" data-g="${g}" aria-label="${p.name}"${side ? ' tabindex="-1" aria-hidden="true"' : ''}><img src="assets/logo-${p.id}.webp" alt="" width="220" height="220"></button>`;
+  }).join('');
   dots.innerHTML = PARTNERS.map(() => '<i></i>').join('');
   const items = $$('.lc-item', track), dotEls = $$('i', dots);
-  let cur = -1, lcTick = false;
-  function showInfo(i) {
-    if (i === cur) return; cur = i; const p = PARTNERS[i];
+  let cur = -1, shown = -1, lcTick = false, holding = false, settle = null;
+  function showInfo(g) {
+    cur = g; const i = g % N; if (i === shown) return; shown = i; const p = PARTNERS[i];
     $('#lcK').textContent = p.k || ''; $('#lcName').textContent = p.name; $('#lcOff').textContent = p.off; $('#lcDet').textContent = p.det;
     info.classList.remove('chg'); void info.offsetWidth; info.classList.add('chg');
     dotEls.forEach((d, j) => d.classList.toggle('on', j === i));
@@ -1215,28 +1221,40 @@ a{color:var(--gold)}
   function lcUpdate() {
     lcTick = false;
     let best = 0, bd = 1e9;
-    items.forEach((it, i) => {
-      const d = Math.abs((it.offsetLeft + it.offsetWidth / 2 - track.scrollLeft) - track.clientWidth / 2) / 112;
-      it.style.setProperty('--s', (1.45 - Math.min(d, 2) * 0.33).toFixed(3));
-      it.style.setProperty('--o', (1 - Math.min(d, 2) * 0.3).toFixed(3));
-      if (d < bd) { bd = d; best = i; }
+    const mid = track.scrollLeft + track.clientWidth / 2;
+    items.forEach((it, g) => {
+      const d = Math.abs(it.offsetLeft + it.offsetWidth / 2 - mid) / 112;
+      if (d < 3) { it.style.setProperty('--s', (1.45 - Math.min(d, 2) * 0.33).toFixed(3)); it.style.setProperty('--o', (1 - Math.min(d, 2) * 0.3).toFixed(3)); }
+      else if (it.style.getPropertyValue('--s') !== '0.790') { it.style.setProperty('--s', '0.790'); it.style.setProperty('--o', '0.400'); }
+      if (d < bd) { bd = d; best = g; }
     });
     showInfo(best);
   }
-  track.addEventListener('scroll', () => { if (!lcTick) { lcTick = true; requestAnimationFrame(lcUpdate); } }, { passive: true });
-  function goTo(i, smooth = true) { const it = items[i]; track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: smooth && !RM ? 'smooth' : 'auto' }); }
-  items.forEach((it, i) => it.addEventListener('click', () => { goTo(i); swipeCard(); stopAuto(); }));
-  addEventListener('resize', () => goTo(Math.max(cur, 0), false));
+  const span = () => items[N].offsetLeft - items[0].offsetLeft;
+  function recenter() {
+    if (holding || cur < 0) return;
+    const copy = Math.floor(cur / N); if (copy === MID) return;
+    track.scrollLeft += (MID - copy) * span();
+  }
+  track.addEventListener('scroll', () => {
+    if (!lcTick) { lcTick = true; requestAnimationFrame(lcUpdate); }
+    clearTimeout(settle); settle = setTimeout(recenter, 180);
+  }, { passive: true });
+  track.addEventListener('touchstart', () => { holding = true; }, { passive: true });
+  ['touchend', 'touchcancel'].forEach(ev => track.addEventListener(ev, () => { holding = false; clearTimeout(settle); settle = setTimeout(recenter, 180); }, { passive: true }));
+  function goTo(g, smooth = true) { const it = items[g]; track.scrollTo({ left: it.offsetLeft - (track.clientWidth - it.offsetWidth) / 2, behavior: smooth && !RM ? 'smooth' : 'auto' }); }
+  items.forEach((it, g) => it.addEventListener('click', () => { goTo(g); swipeCard(); stopAuto(); }));
+  addEventListener('resize', () => goTo(cur >= 0 ? MID * N + (cur % N) : MID * N, false));
   // scorre da solo finché nessuno lo tocca
   let auto = null, lcVis = false, touched = false;
   function stopAuto() { touched = true; clearInterval(auto); auto = null; }
   ['pointerdown', 'touchstart', 'wheel'].forEach(ev => track.addEventListener(ev, stopAuto, { passive: true }));
   new IntersectionObserver(([e]) => {
     lcVis = e.isIntersecting;
-    if (lcVis && !touched && !RM && !auto) auto = setInterval(() => { if (lcVis) goTo((cur + 1) % items.length); }, 2600);
+    if (lcVis && !touched && !RM && !auto) auto = setInterval(() => { if (lcVis) goTo(cur + 1); }, 2600);
     if (!lcVis && auto) { clearInterval(auto); auto = null; }
   }).observe(track);
-  requestAnimationFrame(() => { goTo(0, false); lcUpdate(); });
+  requestAnimationFrame(() => { goTo(MID * N, false); lcUpdate(); });
   function swipeCard() { ncard.classList.remove('idle', 'swipe'); void ncard.offsetWidth; ncard.classList.add('swipe'); setTimeout(() => { ncard.classList.remove('swipe'); if (!RM) ncard.classList.add('idle'); }, 720); }
 
   /* ---------- CARD: quanto risparmi ---------- */
