@@ -23,7 +23,7 @@ img{max-width:100%}
 <meta name="theme-color" content="#060E1B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=JetBrains+Mono:wght@500;700&family=League+Spartan:wght@600;700;800;900&family=Libre+Baskerville&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=JetBrains+Mono:wght@500;700&family=League+Spartan:wght@600;700;800;900&family=Libre+Baskerville&family=Pinyon+Script&display=swap">
 <style>
 /* Layout: una colonna da telefono, capitoli a tutta larghezza che alternano blu notte e sfumatura del brand; ogni proposta ha il suo gioco. */
 :root{
@@ -309,9 +309,10 @@ a{color:var(--gold)}
 .mbar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
 .mrow{display:grid;gap:8px;margin-top:14px}
 .mlab{font:700 11px/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:#D7EEFF}
-.mseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:16px;background:rgba(6,14,27,.4);border:1px solid rgba(255,255,255,.22)}
+.mseg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;border-radius:16px;background:rgba(6,14,27,.4);border:1px solid rgba(255,255,255,.22)}
 .mseg button{padding:12px 4px;border-radius:12px;font:700 13.5px/1.1 var(--f-body);color:#fff;display:grid;gap:3px}
 .mseg button small{font:500 11px/1.2 var(--f-body);opacity:.85}
+@media (max-width:480px){.mseg{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .mseg button.on{background:var(--gold);color:var(--ink)}
 .mcols{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .msw{display:grid;justify-items:center;gap:6px;font:600 12px/1 var(--f-body);color:#D7EEFF}
@@ -812,7 +813,7 @@ a{color:var(--gold)}
   <div class="wrap">
     <p class="kicker">Merch della scuola</p>
     <h2 class="title">Il merch<br>del <span class="g">Severi</span></h2>
-    <p class="lead">Tre grafiche, tre colori. Girala col dito e guarda davanti e dietro.</p>
+    <p class="lead">Quattro grafiche, tre colori. Girala col dito e guarda davanti e dietro.</p>
     <div class="mstage" id="mStage">
       <div class="mload" id="mLoad"><span>Carico la felpa…</span><div class="mbar"><i id="mProg"></i></div></div>
       <div class="mname" id="mName">Atlante · Bianca</div>
@@ -822,8 +823,9 @@ a{color:var(--gold)}
       <div class="mlab">Versione</div>
       <div class="mseg" id="mVers">
         <button type="button" class="on" data-v="0">Atlante<small>logo + spirale aurea</small></button>
-        <button type="button" data-v="1">Iconic<small>tavola periodica + Vitruviano</small></button>
-        <button type="button" data-v="2">Einstein<small>logo + Einstein</small></button>
+        <button type="button" data-v="1">Iconic<small>ICONIC + scritta Severi</small></button>
+        <button type="button" data-v="2">Leonardo<small>scritta + Vitruviano</small></button>
+        <button type="button" data-v="3">Einstein<small>logo + Einstein</small></button>
       </div>
     </div>
     <div class="mrow">
@@ -1559,13 +1561,16 @@ a{color:var(--gold)}
   ];
   const VERS = [
     { name: 'Atlante',  front: 'logo',   back: 'atlante' },
-    { name: 'Iconic',   front: 'iconic', back: 'vitruviano' },
+    { name: 'Iconic',   front: 'iconic', back: 'scritta' },
+    { name: 'Leonardo', front: 'firma',  back: 'vitruviano' },
     { name: 'Einstein', front: 'logo',   back: 'einstein' }
   ];
   /* dove va ogni stampa: x,y in proporzione al busto (0 = centro), w = larghezza in proporzione al busto */
   const SLOTS = {
     iconic:     { side: 0, x: 0,     y: 0.06, w: 0.64 },
     logo:       { side: 0, x: 0.17,  y: 0.13, w: 0.19 },
+    firma:      { side: 0, x: 0.17,  y: 0.15, w: 0.30 },
+    scritta:    { side: 1, x: 0,     y: 0.06, w: 1.02 },
     vitruviano: { side: 1, x: 0,     y: 0.06, w: 0.66 },
     einstein:   { side: 1, x: 0,     y: 0.0,  w: 0.56 },
     atlante:    { side: 1, x: 0,     y: 0.04, w: 0.52 }
@@ -1600,6 +1605,15 @@ a{color:var(--gold)}
         x.font = `500 ${box * 0.11}px "Archivo", sans-serif`; x.fillText(n, x0 + box / 2, 4 + box * 0.9);
         x0 += box + gap;
       });
+      return cv;
+    }
+    if (kind === 'firma' || kind === 'scritta') {   // scritta in corsivo ottocentesco
+      const big = kind === 'scritta', fs = big ? 150 : 110, font = `${fs}px "Pinyon Script", "Snell Roundhand", cursive`;
+      const m = document.createElement('canvas').getContext('2d'); m.font = font;
+      const W = Math.ceil(Math.max(m.measureText('Liceo Scientifico').width, m.measureText('Francesco Severi').width) + fs * 0.5), H = Math.round(fs * 2.5);
+      const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
+      x.fillStyle = big ? col.line : col.logo; x.textAlign = 'center'; x.textBaseline = 'alphabetic'; x.font = font;
+      x.fillText('Liceo Scientifico', W / 2, fs * 1.05); x.fillText('Francesco Severi', W / 2, fs * 2.15);
       return cv;
     }
     if (kind === 'logo') {
@@ -1757,7 +1771,7 @@ a{color:var(--gold)}
     fl.load(BASE + 'felpa.json', txt => new THREE.GLTFLoader().parse(txt, '', g => res(g.scene), rej),
       e => { if (e.total) $('#mProg').style.width = Math.round(100 * e.loaded / e.total) + '%'; }, rej);
   });
-  Promise.all([modelP, ...Object.keys(SRC).map(loadImg), document.fonts ? document.fonts.ready : 0]).then(([root]) => {
+  Promise.all([modelP, ...Object.keys(SRC).map(loadImg), document.fonts ? document.fonts.load('80px "Pinyon Script"').then(() => document.fonts.ready) : 0]).then(([root]) => {
     setupModel(root); $('#mLoad').remove(); resize(); apply(); idle = performance.now(); requestAnimationFrame(loop);
   }).catch(() => { $('#mLoad').textContent = 'Non riesco a caricare la felpa. Ricarica la pagina.'; });
   }
