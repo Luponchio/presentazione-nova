@@ -23,7 +23,7 @@ img{max-width:100%}
 <meta name="theme-color" content="#060E1B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=JetBrains+Mono:wght@500;700&family=League+Spartan:wght@600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Caveat:wght@600&family=JetBrains+Mono:wght@500;700&family=League+Spartan:wght@600;700;800;900&family=Libre+Baskerville&display=swap">
 <style>
 /* Layout: una colonna da telefono, capitoli a tutta larghezza che alternano blu notte e sfumatura del brand; ogni proposta ha il suo gioco. */
 :root{
@@ -299,17 +299,29 @@ a{color:var(--gold)}
 .bstamp.on{opacity:1;transform:rotate(-3deg) scale(1)}
 
 /* ---------- Felpa ---------- */
-.hood-stage{perspective:900px;display:grid;place-items:center;padding:10px 0;position:relative}
-.hood{--p:0;--hz:#0036C5;--hz2:#00279A;--ht:#FFFFFF;width:min(78%,320px);transform:rotateY(calc((var(--p) - .5) * 46deg));transition:transform .1s linear}
-.hood .hz{fill:var(--hz);fill-opacity:clamp(0,calc(var(--p) * 2.4 - .4),1);transition:fill .4s}
-.hood .hz2{fill:var(--hz2);fill-opacity:clamp(0,calc(var(--p) * 2.4 - .4),1);transition:fill .4s}
-.hood .st{stroke:rgba(255,255,255,.85);stroke-width:1.6;stroke-linejoin:round}
-.hood text{fill:var(--ht);font:900 17px var(--f-display);letter-spacing:.04em;opacity:clamp(0,calc(var(--p) * 2.4 - .6),1);transition:fill .4s}
-.tape{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) rotate(-8deg);background:#FFD400;color:var(--ink);font:900 clamp(18px,5.6vw,26px)/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;padding:10px 26px;box-shadow:0 8px 20px rgba(0,0,0,.3);white-space:nowrap}
-.swatches{display:flex;gap:10px;align-items:center}
-.sw{width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.7)}
-.sw.on{box-shadow:0 0 0 3px var(--gold)}
-.swatches span{font:600 13px/1 var(--f-body);color:var(--white);margin-right:4px}
+.mstage{position:relative;width:100%;aspect-ratio:1/1.1;max-height:600px;border-radius:24px;overflow:hidden;background:radial-gradient(60% 55% at 50% 45%,rgba(255,255,255,.16),transparent 70%),rgba(6,14,27,.32);border:1px solid rgba(255,255,255,.22);touch-action:pan-y;cursor:grab}
+.mstage canvas{width:100%!important;height:100%!important;display:block}
+.mname{position:absolute;left:14px;top:14px;font:800 13px/1 var(--f-display);text-transform:uppercase;letter-spacing:.06em;background:rgba(6,14,27,.55);border:1px solid rgba(255,255,255,.22);padding:9px 12px;border-radius:99px;pointer-events:none;color:#fff}
+.mdrag{position:absolute;left:0;right:0;bottom:12px;text-align:center;font:600 12px/1 var(--f-mono);color:#D7EEFF;pointer-events:none}
+.mload{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:12px;font:600 13px var(--f-mono);color:#D7EEFF}
+.mbar{width:160px;height:4px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden}
+.mbar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
+.mrow{display:grid;gap:8px;margin-top:14px}
+.mlab{font:700 11px/1 var(--f-body);letter-spacing:.18em;text-transform:uppercase;color:#D7EEFF}
+.mseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:16px;background:rgba(6,14,27,.4);border:1px solid rgba(255,255,255,.22)}
+.mseg button{padding:12px 4px;border-radius:12px;font:700 13.5px/1.1 var(--f-body);color:#fff;display:grid;gap:3px}
+.mseg button small{font:500 11px/1.2 var(--f-body);opacity:.85}
+.mseg button.on{background:var(--gold);color:var(--ink)}
+.mcols{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.msw{display:grid;justify-items:center;gap:6px;font:600 12px/1 var(--f-body);color:#D7EEFF}
+.msw i{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.6);display:block}
+.msw.on i{box-shadow:0 0 0 3px rgba(6,14,27,.6),0 0 0 6px var(--gold)}
+.msw.on{color:#fff}
+.msides{display:flex;gap:8px;margin-left:auto}
+.msides button{padding:10px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.3);font:700 12px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:#fff}
+.msides button.on{background:#fff;color:var(--ink);border-color:#fff}
+.mnote{margin:14px 0 0;font:500 12px/1.45 var(--f-body);color:#D7EEFF;opacity:.85}
+.mnote a{color:#D7EEFF}
 
 /* ---------- S.O.S. ---------- */
 .env-stage{display:grid;place-items:center;padding:110px 0 10px}
@@ -798,27 +810,33 @@ a{color:var(--gold)}
   <div class="wrap">
     <p class="kicker">Merch della scuola</p>
     <h2 class="title">Il merch<br>del <span class="g">Severi</span></h2>
-    <p class="lead">Felpe e gadget della nostra scuola. Il disegno lo stiamo preparando.</p>
-    <div class="hood-stage">
-      <svg class="hood" id="hood" viewBox="0 0 200 210" aria-hidden="true">
-        <path class="hz st" d="M54 58 L22 150 L22 176 L44 176 L66 104 Z"/>
-        <path class="hz st" d="M146 58 L178 150 L178 176 L156 176 L134 104 Z"/>
-        <path class="hz st" d="M52 58 Q100 44 148 58 L152 186 Q100 194 48 186 Z"/>
-        <path class="hz st" d="M70 60 C62 30 78 12 100 12 C122 12 138 30 130 60 Q100 72 70 60 Z"/>
-        <path class="hz2 st" d="M82 56 C80 36 88 26 100 26 C112 26 120 36 118 56 Q100 64 82 56 Z"/>
-        <path class="hz2 st" d="M68 146 L132 146 L140 176 L60 176 Z"/>
-        <path class="hz2 st" d="M48 182 Q100 190 152 182 L152 194 Q100 202 48 194 Z"/>
-        <path class="st" fill="none" d="M94 62 L92 92 M106 62 L108 92"/>
-        <text x="100" y="124" text-anchor="middle">SEVERI</text>
-      </svg>
-      <div class="tape">In arrivo</div>
+    <p class="lead">Tre grafiche, tre colori. Girala col dito e guarda davanti e dietro.</p>
+    <div class="mstage" id="mStage">
+      <div class="mload" id="mLoad"><span>Carico la felpa…</span><div class="mbar"><i id="mProg"></i></div></div>
+      <div class="mname" id="mName">Atlante · Bianca</div>
+      <div class="mdrag">↔ Trascina per girarla</div>
     </div>
-    <div class="swatches" id="swatches">
-      <span>Prova un colore</span>
-      <button class="sw on" type="button" style="background:#0036C5" data-c="#0036C5,#00279A,#FFFFFF" aria-label="Blu"></button>
-      <button class="sw" type="button" style="background:#F2F2EE" data-c="#F2F2EE,#D9D9D2,#0036C5" aria-label="Bianco"></button>
-      <button class="sw" type="button" style="background:#141821" data-c="#141821,#0A0D13,#FFD666" aria-label="Nero"></button>
+    <div class="mrow">
+      <div class="mlab">Versione</div>
+      <div class="mseg" id="mVers">
+        <button type="button" class="on" data-v="0">Atlante<small>logo + spirale aurea</small></button>
+        <button type="button" data-v="1">Iconic<small>tavola periodica + Vitruviano</small></button>
+        <button type="button" data-v="2">Einstein<small>logo + Einstein</small></button>
+      </div>
     </div>
+    <div class="mrow">
+      <div class="mlab">Colore</div>
+      <div class="mcols" id="mCols">
+        <button type="button" class="msw on" data-c="0"><i style="background:#EEEEE9"></i>Bianca</button>
+        <button type="button" class="msw" data-c="1"><i style="background:#1A1B20"></i>Nera</button>
+        <button type="button" class="msw" data-c="2"><i style="background:#1C8CE3"></i>Azzurra</button>
+        <div class="msides" id="mSides">
+          <button type="button" class="on">Fronte</button>
+          <button type="button">Retro</button>
+        </div>
+      </div>
+    </div>
+    <p class="mnote">Anteprima indicativa: colori e misure della stampa vera possono cambiare. Modello 3D “Hoodie” di virtualpandora (<a href="https://sketchfab.com/3d-models/97611a53e3b846f69e0655b210f72b2f" target="_blank" rel="noopener">Sketchfab</a>), licenza <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</p>
   </div>
 </section>
 
@@ -1040,7 +1058,6 @@ a{color:var(--gold)}
   /* ---------- scroll: barra, capitolo, bagni, felpa ---------- */
   const bar = $('#pbar'), lab = $('#plab'), top = $('#top'), chs = $$('[data-ch]');
   const bagBars = $('#bagni .bars'), fills = $$('.bfill'), pcts = $$('.bpct'), bstamp = $('#bstamp');
-  const fSec = $('#felpa'), hood = $('#hood');
   let ticking = false;
   function onScroll() {
     ticking = false;
@@ -1063,9 +1080,6 @@ a{color:var(--gold)}
       pcts[i].textContent = Math.round(q * 100) + '%';
     });
     bstamp.classList.toggle('on', all);
-    // felpa
-    const fr = fSec.getBoundingClientRect();
-    hood.style.setProperty('--p', clamp((vh - fr.top) / (vh + fr.height * 0.6), 0, 1).toFixed(3));
   }
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   addEventListener('resize', onScroll);
@@ -1387,12 +1401,6 @@ a{color:var(--gold)}
     tradeBtn.textContent = sold ? 'Rimetti in vendita' : 'Compra il libro';
   });
 
-  /* ---------- FELPA ---------- */
-  $$('#swatches .sw').forEach(s => s.addEventListener('click', () => {
-    const [a, b, c] = s.dataset.c.split(',');
-    hood.style.setProperty('--hz', a); hood.style.setProperty('--hz2', b); hood.style.setProperty('--ht', c);
-    $$('#swatches .sw').forEach(x => x.classList.toggle('on', x === s));
-  }));
 
   /* ---------- S.O.S. ---------- */
   const env = $('#env'), envMsg = $('#envMsg'); let envBusy = false;
@@ -1513,6 +1521,239 @@ a{color:var(--gold)}
     chosen[free] = n; renderVote();
   }));
   prefs.forEach((p, i) => p.addEventListener('click', () => { chosen[i] = null; renderVote(); }));
+})();
+</script>
+<script>
+(() => {
+  const stage = document.getElementById('mStage'); if (!stage) return;
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const BASE = 'assets/merch/';
+  function run() {
+
+  /* ---------- colori della felpa e dell'inchiostro ---------- */
+  const COLORS = [
+    { name: 'Bianca',  base: '#EEEEE9', rib: '#E4E4DE', cord: '#F2F2EE', line: '#141414', logo: '#141414', iconic: '#141414' },
+    { name: 'Nera',    base: '#1A1B20', rib: '#141519', cord: '#1E1F24', line: '#D9B45A', logo: '#FFFFFF', iconic: '#FFFFFF' },
+    { name: 'Azzurra', base: '#1C8CE3', rib: '#187CCB', cord: '#FFFFFF', line: '#FFFFFF', logo: '#FFFFFF', iconic: '#FFFFFF' }
+  ];
+  const VERS = [
+    { name: 'Atlante',  front: 'logo',   back: 'atlante' },
+    { name: 'Iconic',   front: 'iconic', back: 'vitruviano' },
+    { name: 'Einstein', front: 'logo',   back: 'einstein' }
+  ];
+  /* dove va ogni stampa: x,y in proporzione al busto (0 = centro), w = larghezza in proporzione al busto */
+  const SLOTS = {
+    iconic:     { side: 0, x: 0,     y: 0.06, w: 0.64 },
+    logo:       { side: 0, x: 0.17,  y: 0.13, w: 0.19 },
+    vitruviano: { side: 1, x: 0,     y: 0.06, w: 0.66 },
+    einstein:   { side: 1, x: 0,     y: 0.0,  w: 0.56 },
+    atlante:    { side: 1, x: 0,     y: 0.04, w: 0.52 }
+  };
+  let v = 0, c = 0;
+
+  /* ---------- immagini delle stampe ---------- */
+  const SRC = { vitruviano: BASE + 'vitruviano-mask.png', atlante: BASE + 'atlante-mask.png', logo: BASE + 'logo-severi-mask.png', einstein: BASE + 'einstein-cut.png' };
+  const IMG = {};
+  const loadImg = k => new Promise(r => { const i = new Image(); i.onload = () => { IMG[k] = i; r(); }; i.onerror = () => r(); i.src = SRC[k]; });
+
+  function tint(img, color, w, h) {
+    const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const x = cv.getContext('2d');
+    x.drawImage(img, 0, 0, w, h);
+    const d = x.getImageData(0, 0, w, h), a = d.data;
+    const r = parseInt(color.slice(1, 3), 16), g = parseInt(color.slice(3, 5), 16), b = parseInt(color.slice(5, 7), 16);
+    for (let i = 0; i < a.length; i += 4) { const m = a[i]; a[i] = r; a[i + 1] = g; a[i + 2] = b; a[i + 3] = m; }
+    x.putImageData(d, 0, 0); return cv;
+  }
+  /* ogni stampa diventa un canvas trasparente */
+  function printCanvas(kind, col) {
+    if (kind === 'iconic') {
+      const els = [['I', '53', '126.90', 'Iodine'], ['Co', '27', '58.933', 'Cobalt'], ['Ni', '28', '58.693', 'Nickel'], ['C', '6', '12.011', 'Carbon']];
+      const box = 240, gap = 16, W = els.length * box + (els.length - 1) * gap + 8, H = box + 8;
+      const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
+      x.strokeStyle = col.iconic; x.fillStyle = col.iconic; x.lineWidth = 6; let x0 = 4;
+      els.forEach(([s, z, m, n]) => {
+        x.strokeRect(x0, 4, box, box);
+        x.textAlign = 'left'; x.font = `600 ${box * 0.12}px "JetBrains Mono", monospace`; x.fillText(z, x0 + box * 0.07, 4 + box * 0.17);
+        x.textAlign = 'right'; x.fillText(m, x0 + box * 0.93, 4 + box * 0.17);
+        x.textAlign = 'center'; x.font = `700 ${box * 0.46}px "Archivo", sans-serif`; x.fillText(s, x0 + box / 2, 4 + box * 0.68);
+        x.font = `500 ${box * 0.11}px "Archivo", sans-serif`; x.fillText(n, x0 + box / 2, 4 + box * 0.9);
+        x0 += box + gap;
+      });
+      return cv;
+    }
+    if (kind === 'logo') {
+      const img = IMG.logo; const lw = 300, lh = Math.round(lw * img.height / img.width);
+      const W = 520, H = lh + 150; const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
+      x.drawImage(tint(img, col.logo, lw, lh), (W - lw) / 2, 0);
+      x.fillStyle = col.logo; x.textAlign = 'center'; x.font = '50px "Libre Baskerville", Georgia, serif';
+      x.fillText('Liceo scientifico', W / 2, lh + 70); x.fillText('F. Severi', W / 2, lh + 132);
+      return cv;
+    }
+    const img = IMG[kind];
+    if (kind === 'einstein') { const cv = document.createElement('canvas'); cv.width = img.width; cv.height = img.height; cv.getContext('2d').drawImage(img, 0, 0); return cv; }
+    const W = 1024, H = Math.round(W * img.height / img.width); return tint(img, col.line, W, H);
+  }
+
+  /* ---------- scena ---------- */
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.NoToneMapping;
+  stage.appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50); camera.position.set(0, 0.02, 4.9);
+  const keyL = new THREE.DirectionalLight(0xffffff, 1.0); keyL.position.set(2.5, 3, 4); scene.add(keyL);
+  const rimL = new THREE.DirectionalLight(0xbfe6ff, 0.5); rimL.position.set(-3, 1.5, -4); scene.add(rimL);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x223355, 0.15));
+
+  const spin = new THREE.Group(); scene.add(spin);
+  const model = new THREE.Group(); spin.add(model);
+  // ombra morbida sotto
+  const sh = document.createElement('canvas'); sh.width = sh.height = 128; { const g = sh.getContext('2d'), gr = g.createRadialGradient(64, 64, 4, 64, 64, 62); gr.addColorStop(0, 'rgba(0,0,0,.5)'); gr.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); }
+  const shadow = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 0.8), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sh), transparent: true, depthWrite: false }));
+  shadow.rotation.x = -Math.PI / 2; shadow.position.y = -1.08; scene.add(shadow);
+
+  const MAT = {
+    body: new THREE.MeshStandardMaterial({ roughness: 0.95, metalness: 0, side: THREE.DoubleSide, envMapIntensity: 0.3 }),
+    rib:  new THREE.MeshStandardMaterial({ roughness: 1, metalness: 0, side: THREE.DoubleSide, envMapIntensity: 0.3 }),
+    cord: new THREE.MeshStandardMaterial({ roughness: 0.8, metalness: 0, side: THREE.DoubleSide, envMapIntensity: 0.3 }),
+    metal: new THREE.MeshStandardMaterial({ color: 0xb8bcc4, roughness: 0.35, metalness: 0.9 })
+  };
+  let fabric = [], ribs = [], ribTop = -0.9;               // mesh del tessuto principale (su cui si stampa)
+  let fabricBox = null;          // ingombro del busto
+  const decals = {};             // stampe calcolate una volta sola
+
+  function setupModel(root) {
+    root.traverse(n => {
+      if (!n.isMesh) return;
+      const name = (n.material && n.material.name) || '';
+      if (/Fleece|Material125269/i.test(name)) { n.material = MAT.body; fabric.push(n); }
+      else if (/Rib/i.test(name)) { n.material = MAT.rib; ribs.push(n); }
+      else if (/Holes/i.test(name)) n.material = MAT.metal;
+      else n.material = MAT.cord;
+    });
+    // centra e porta l'altezza a 2.1 unita'
+    const b = new THREE.Box3().setFromObject(root), s = b.getSize(new THREE.Vector3()), ctr = b.getCenter(new THREE.Vector3());
+    root.position.sub(ctr); model.add(root); model.scale.setScalar(2.1 / s.y);
+    spin.updateMatrixWorld(true);
+    fabricBox = new THREE.Box3(); fabric.forEach(m => fabricBox.expandByObject(m));
+    // dove finisce la fascia in basso, al centro della schiena: li' parte Einstein
+    const v3 = new THREE.Vector3(); let best = -9;
+    ribs.forEach(m => { const pa = m.geometry.attributes.position; for (let i = 0; i < pa.count; i++) { v3.fromBufferAttribute(pa, i).applyMatrix4(m.matrixWorld); if (Math.abs(v3.x) < 0.12 && v3.z < 0 && v3.y < -0.5 && v3.y > best) best = v3.y; } });
+    if (best > -9) ribTop = best;
+  }
+
+  /* tiene solo i triangoli rivolti verso chi guarda quel lato: cosi' la stampa del retro non passa davanti */
+  function facing(g, dirZ) {
+    const P = g.attributes.position.array, N = g.attributes.normal.array, U = g.attributes.uv.array;
+    const keep = [];
+    for (let t = 0; t < P.length / 9; t++) { const nz = (N[t * 9 + 2] + N[t * 9 + 5] + N[t * 9 + 8]) / 3; if (nz * dirZ > 0.15) keep.push(t); }
+    const p2 = new Float32Array(keep.length * 9), n2 = new Float32Array(keep.length * 9), u2 = new Float32Array(keep.length * 6);
+    keep.forEach((t, i) => { p2.set(P.subarray(t * 9, t * 9 + 9), i * 9); n2.set(N.subarray(t * 9, t * 9 + 9), i * 9); u2.set(U.subarray(t * 6, t * 6 + 6), i * 6); });
+    const out = new THREE.BufferGeometry();
+    out.setAttribute('position', new THREE.BufferAttribute(p2, 3)); out.setAttribute('normal', new THREE.BufferAttribute(n2, 3)); out.setAttribute('uv', new THREE.BufferAttribute(u2, 2));
+    g.dispose(); return out;
+  }
+  const NECK_Y = 0.55;    // dove il cappuccio si attacca alla schiena
+  const BACK = { einstein: [0.11, 0.997], vitruviano: [0.30, 0.78], atlante: [0.19, 0.97] };
+  const ray = new THREE.Raycaster();
+  function decalFor(kind) {
+    if (decals[kind]) return decals[kind];
+    const sl = SLOTS[kind], b = fabricBox, cx = (b.min.x + b.max.x) / 2, half = (b.max.x - b.min.x) / 2;
+    // le maniche allargano l'ingombro: considero busto il 62% della larghezza
+    const torso = half * 0.62;
+    const sideSign = sl.side ? -1 : 1;
+    let px = cx + sl.x * torso * 2 * sideSign, py = sl.y * (b.max.y - b.min.y) / 2, fixedH = 0;
+    if (BACK[kind]) {   // retro: altezza presa dai disegni di Canva (0 = attaccatura del cappuccio, 1 = inizio della fascia)
+      const span = NECK_Y - ribTop, top = NECK_Y - BACK[kind][0] * span, bottom = NECK_Y - BACK[kind][1] * span;
+      py = (top + bottom) / 2; fixedH = top - bottom;
+    }
+    ray.set(new THREE.Vector3(px, py, sideSign * 10), new THREE.Vector3(0, 0, -sideSign));
+    const hit = ray.intersectObjects(fabric, false)[0];
+    const p = hit ? hit.point : new THREE.Vector3(px, py, sideSign * 0.3);
+    const cv0 = printCanvas(kind, COLORS[0]), aspect = cv0.height / cv0.width;
+    const w = fixedH ? fixedH / aspect : sl.w * torso * 2, size = new THREE.Vector3(w, w * aspect, 0.7);
+    const rot = new THREE.Euler(0, sl.side ? Math.PI : 0, 0);
+    const dirZ = sl.side ? -1 : 1;
+    const geos = fabric.map(m => facing(new THREE.DecalGeometry(m, p, rot, size), dirZ)).filter(g => g.attributes.position.count);
+    const mat = new THREE.MeshStandardMaterial({ side: THREE.FrontSide, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -4, roughness: kind === 'einstein' ? 0.8 : 0.7, metalness: 0, envMapIntensity: 0.3 });
+    const group = new THREE.Group(); geos.forEach(g => group.add(new THREE.Mesh(g, mat)));
+    return (decals[kind] = { group, mat, tex: {} });
+  }
+  function setPrint(kind) {
+    const d = decalFor(kind);
+    if (!d.tex[c]) { const t = new THREE.CanvasTexture(printCanvas(kind, COLORS[c])); t.encoding = THREE.sRGBEncoding; t.anisotropy = 8; d.tex[c] = t; }
+    d.mat.map = d.tex[c]; d.mat.needsUpdate = true; return d.group;
+  }
+
+  const shown = new THREE.Group(); spin.add(shown);
+  function apply() {
+    const col = COLORS[c];
+    MAT.body.color.set(col.base).convertSRGBToLinear(); MAT.rib.color.set(col.rib).convertSRGBToLinear(); MAT.cord.color.set(col.cord).convertSRGBToLinear();
+    // le stampe si calcolano con la felpa ferma, poi si rimettono in rotazione
+    const ry = spin.rotation.y, rx = spin.rotation.x; spin.rotation.set(0, 0, 0); spin.updateMatrixWorld(true);
+    shown.clear(); shown.add(setPrint(VERS[v].front), setPrint(VERS[v].back));
+    spin.rotation.set(rx, ry, 0);
+    $('#mName').textContent = VERS[v].name + ' · ' + col.name;
+  }
+  function resize() { const r = stage.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); camera.aspect = r.width / r.height; camera.updateProjectionMatrix(); }
+  addEventListener('resize', resize);
+
+  /* ---------- rotazione col dito ---------- */
+  let rotY = -0.4, rotX = 0.03, vel = 0, drag = null, idle = 0, target = null;
+  stage.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, ry: rotY, rx: rotX }; target = null; vel = 0; try { stage.setPointerCapture(e.pointerId); } catch (_) {} });
+  stage.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y, ny = drag.ry + dx * 0.012;
+    vel = ny - rotY; rotY = ny; rotX = Math.max(-0.3, Math.min(0.3, drag.rx + dy * 0.004));
+  });
+  const end = () => { drag = null; idle = performance.now(); };
+  stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
+  function face(side) { const want = side ? Math.PI : 0, TAU = 2 * Math.PI; let d = ((want - rotY) % TAU + TAU) % TAU; if (d > Math.PI) d -= TAU; target = rotY + d; idle = performance.now(); }
+  function loop(t) {
+    if (!drag) {
+      if (target !== null) { rotY += (target - rotY) * 0.1; if (Math.abs(target - rotY) < 0.002) { rotY = target; target = null; } }
+      else if (Math.abs(vel) > 0.0005) { rotY += vel; vel *= 0.94; }
+      else if (!RM && t - idle > 2500) rotY += 0.005;
+      rotX += (0.03 - rotX) * 0.05;
+    }
+    spin.rotation.y = rotY; spin.rotation.x = rotX;
+    const facingBack = Math.cos(rotY) < 0; $$('#mSides button').forEach((b, i) => b.classList.toggle('on', (i === 1) === facingBack));
+    renderer.render(scene, camera);
+    if (visible) requestAnimationFrame(loop); else running = false;
+  }
+  let visible = true, running = true;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !running && fabricBox) { running = true; requestAnimationFrame(loop); } }).observe(stage);
+
+  /* ---------- controlli ---------- */
+  $$('#mVers button').forEach(b => b.addEventListener('click', () => { v = +b.dataset.v; $$('#mVers button').forEach(x => x.classList.toggle('on', x === b)); if (fabricBox) { apply(); face(1); } }));
+  $$('#mCols .msw').forEach(b => b.addEventListener('click', () => { c = +b.dataset.c; $$('#mCols .msw').forEach(x => x.classList.toggle('on', x === b)); if (fabricBox) apply(); }));
+  $$('#mSides button').forEach((b, i) => b.addEventListener('click', () => face(i)));
+
+  const modelP = new Promise((res, rej) => {
+    const fl = new THREE.FileLoader(); fl.setResponseType('text');
+    fl.load(BASE + 'felpa.json', txt => new THREE.GLTFLoader().parse(txt, '', g => res(g.scene), rej),
+      e => { if (e.total) $('#mProg').style.width = Math.round(100 * e.loaded / e.total) + '%'; }, rej);
+  });
+  Promise.all([modelP, ...Object.keys(SRC).map(loadImg), document.fonts ? document.fonts.ready : 0]).then(([root]) => {
+    setupModel(root); $('#mLoad').remove(); resize(); apply(); idle = performance.now(); requestAnimationFrame(loop);
+  }).catch(() => { $('#mLoad').textContent = 'Non riesco a caricare la felpa. Ricarica la pagina.'; });
+  }
+  // three.js si scarica solo quando ci si avvicina al capitolo
+  const LIBS = ['https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js',
+    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/DecalGeometry.js',
+    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js'];
+  const loadLib = (i = 0) => {
+    if (i >= LIBS.length) return run();
+    const s = document.createElement('script'); s.src = LIBS[i]; s.onload = () => loadLib(i + 1);
+    s.onerror = () => { const l = $('#mLoad'); if (l) l.textContent = 'Non riesco a caricare la felpa. Ricarica la pagina.'; };
+    document.head.appendChild(s);
+  };
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); loadLib(); } }, { rootMargin: '800px 0px' });
+  io.observe(stage);
 })();
 </script>
 
